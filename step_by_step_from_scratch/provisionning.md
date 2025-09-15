@@ -109,3 +109,9 @@ To customize even more VMs. Check this official documentation: https://cloud.goo
 
 
 ## Terraform
+Terraform is a tool for provisioning resources in an automated and **declarative** manner. Here are the terraform files & their goals:  
+  - main.tf: Main configuration file, contains the definition of all resources to be created  
+  - variables.tf: Declares all variables used in the configuration  
+  - terraform.tfvars: Provides concrete values for the variables  
+
+You can find all these files at the root of the repository.  

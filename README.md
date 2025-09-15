@@ -5,6 +5,7 @@
   - [Prerequisites](#prerequisites)
   - [Architecture](#architecture)
   - [Commands](#commands)
+    - [Provisionning](#provisionning)
   - [Naming Convention](#naming-convention)
   - [Monitoring](#monitoring)
 </details>  
@@ -17,7 +18,7 @@ GCP Compute Engine --> OK
 GCP Cloud Identity
 GCP GKE (Google Kubernetes Engine)
 Docker  
-Terraform  
+Terraform --> OK    
 Prometheus  
 Grafana  
 
@@ -33,9 +34,22 @@ To see all the prerequisite steps in detail, it happens [here](step_by_step_from
 
 
 # Commands
-| command                                                                          |                   description            |
-|----------------------------------------------------------------------------------|------------------------------------------|
-| gcloud compute ssh --zone "<zone>" "<instance>" --project "streetcoder-aaitouaz" | SSH connection to remote host <instance> |
+## Provisionning
+| Command                             | Detail                                                                                          |
+|-------------------------------------|-------------------------------------------------------------------------------------------------|
+| `terraform init`                    | Initializes the working directory and checks that the required plugins are correctly installed. |
+| `terraform validate`                | Detect errors before applying commands plan & apply                                             |
+| `terraform plan`                    | Shows which actions it will perform to reach the state described in the configuration file.     |
+| `terraform apply`                   | The desired infrastructure is deployed.                                                         |
+| `terraform fmt`                     | Automatically corrects the formatting                                                           |
+| `terraform state list`              | List all resources included inside the state file terraform.tfstate                             |
+| `terraform state show <resource>`   | Displays the details of a specific resource in the state file                                   |
+| `terraform state rm <resource>`     | Remove a specific resource from the state file without deleting it from the infrastructure      |
+| `terraform refresh`                 | Synchronize the state with the actual infrastructure                                            |
+| `terraform destroy`                 | The infrastructure is destroyed.                                                                |
+
+
+##
 
 
 

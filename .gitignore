@@ -1,0 +1,14 @@
+# Terraform state files (sensitive)
+*.tfstate
+*.tfstate.backup
+
+# Terraform variable files containing secrets
+*.tfvars
+
+# Log or temporary files
+*.log
+*.tmp
+
+# OS-generated files
+.DS_Store
+Thumbs.db
