@@ -1,9 +1,14 @@
 # Terraform state files (sensitive)
 *.tfstate
 *.tfstate.backup
+.terraform.*
+terraform.*
 
 # Terraform variable files containing secrets
 *.tfvars
+
+# Hidden Terraform folder
+.terraform/
 
 # Log or temporary files
 *.log

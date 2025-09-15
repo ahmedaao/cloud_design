@@ -18,7 +18,7 @@ provider "google" {
 # Instances
 # -------------------------
 resource "google_compute_instance" "control_plane" {
-  name         = "control-plane"
+  name         = "control-plane-${terraform.workspace}"
   machine_type = var.machine_type
   zone         = var.zone
 
@@ -35,11 +35,11 @@ resource "google_compute_instance" "control_plane" {
     access_config {}
   }
 
-  tags = ["control-plane", "ssh"]
+  tags = ["control-plane", "ssh", terraform.workspace]
 }
 
 resource "google_compute_instance" "worker1" {
-  name         = "worker-1"
+  name         = "worker-1-${terraform.workspace}"
   machine_type = var.machine_type
   zone         = var.zone
 
@@ -56,11 +56,11 @@ resource "google_compute_instance" "worker1" {
     access_config {}
   }
 
-  tags = ["worker-1", "http-3000"]
+  tags = ["worker-1", "http-3000", terraform.workspace]
 }
 
 resource "google_compute_instance" "worker2" {
-  name         = "worker-2"
+  name         = "worker-2-${terraform.workspace}"
   machine_type = var.machine_type
   zone         = var.zone
 
@@ -77,11 +77,11 @@ resource "google_compute_instance" "worker2" {
     access_config {}
   }
 
-  tags = ["worker-2"]
+  tags = ["worker-2", terraform.workspace]
 }
 
 resource "google_compute_instance" "worker3" {
-  name         = "worker-3"
+  name         = "worker-3-${terraform.workspace}"
   machine_type = var.machine_type
   zone         = var.zone
 
@@ -98,14 +98,14 @@ resource "google_compute_instance" "worker3" {
     access_config {}
   }
 
-  tags = ["worker-3"]
+  tags = ["worker-3", terraform.workspace]
 }
 
 # -------------------------
 # Firewall Rules
 # -------------------------
 resource "google_compute_firewall" "allow_control_plane_ssh" {
-  name      = "allow-control-plane-ssh"
+  name      = "allow-control-plane-ssh-${terraform.workspace}"
   network   = "default"
   direction = "INGRESS"
 
@@ -114,13 +114,13 @@ resource "google_compute_firewall" "allow_control_plane_ssh" {
     ports    = ["22"]
   }
 
-  target_tags   = ["control-plane"]
+  target_tags   = ["control-plane", terraform.workspace]
   source_ranges = ["0.0.0.0/0"]
   description   = "Allow SSH access to control-plane from the Internet"
 }
 
 resource "google_compute_firewall" "allow_worker1_3000" {
-  name      = "allow-worker1-3000"
+  name      = "allow-worker1-3000-${terraform.workspace}"
   network   = "default"
   direction = "INGRESS"
 
@@ -129,7 +129,7 @@ resource "google_compute_firewall" "allow_worker1_3000" {
     ports    = ["3000"]
   }
 
-  target_tags   = ["worker-1"]
+  target_tags   = ["worker-1", terraform.workspace]
   source_ranges = ["0.0.0.0/0"]
   description   = "Allow TCP port 3000 access to worker-1 from the Internet"
 }

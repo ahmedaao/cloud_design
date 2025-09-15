@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "deployment environment"
+  default = "default"
+}
+
 variable "project_id" {
   description = "GCP project ID"
   type        = string
